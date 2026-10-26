@@ -2,6 +2,8 @@
 
 API de la clase en vivo. Los participantes identificados publican mensajes y el resto los recibe al instante, sin recargar la pantalla.
 
+Repositorio: https://github.com/CarlosBustos97/auralis-backend
+
 ## Requisitos
 
 - Node.js 18 o superior
