@@ -3,10 +3,11 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const messageSchema = new Schema({
-  
   text: {
     type: String,
     required: true,
+    trim: true,
+    maxlength: 500,
   },
   created_by: {
     type: Schema.Types.ObjectId,
@@ -14,8 +15,9 @@ const messageSchema = new Schema({
     required: true,
   },
   created_at: {
-    type: Schema.Types.Date,
+    type: Date,
     required: true,
+    default: Date.now,
   }
 });
 

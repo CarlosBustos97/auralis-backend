@@ -7,11 +7,13 @@ const userSchema = new Schema({
   name: {
     type: String,
     required: true,
+    trim: true,
   },
   username: {
     type: String,
     required: true,
     unique: true,
+    trim: true,
   },
   password: {
     type: String,
@@ -20,10 +22,12 @@ const userSchema = new Schema({
   status: {
     type: Boolean,
     required: true,
+    default: true,
   },
   role: {
     type: String,
     required: true,
+    enum: ['estudiante', 'moderador'],
   }
 });
 
@@ -38,6 +42,14 @@ userSchema.pre('save', async function(next) {
 userSchema.methods.comparePassword = function(candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
+
+userSchema.set('toJSON', {
+  versionKey: false,
+  transform: (_doc, ret) => {
+    delete ret.password;
+    return ret;
+  },
+});
 
 const User = mongoose.model("User", userSchema);
 export default User;
